@@ -34,7 +34,7 @@ BrowserQuest-PHP is a multiplayer online game based on Mozilla's BrowserQuest, w
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-repo/BrowserQuest-PHP-LLM.git
+git clone https://github.com/kroryan/BrowserQuest-PHP-Docker-LLM.git
 cd BrowserQuest-PHP-LLM
 ```
 
@@ -228,7 +228,7 @@ The `Web/config` directory is mounted as a volume in the container. Any changes 
 1. **Clonar el Repositorio**
 
    ```bash
-   git clone https://github.com/your-repo/BrowserQuest-PHP.git
+   git clone https://github.com/kroryan/BrowserQuest-PHP-Docker-LLM.git
    cd BrowserQuest-PHP
    ```
 
@@ -372,3 +372,4 @@ Para detener y eliminar el contenedor:
 ```bash
 docker-compose down
 ```
+
