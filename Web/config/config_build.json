@@ -1,4 +1,5 @@
 {
-    "host": "Set production websocket host here",
-    "port": 8000
+  "host": "browserquest-php-docker-llm.onrender.com",
+  "port": 443,
+  "secure": true
 }
