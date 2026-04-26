@@ -6,8 +6,10 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"  # Puerto WebSocket para el juego
-      - "8787:8787"  # Puerto HTTP para el frontend web
+      - "8787:8787"
+    environment:
+      - HOST_ADDRESS=browserquest-php-docker-llm.onrender.com
+      - PORT=8787
     volumes:
       # Volumen opcional para desarrollo local
       - ./Web/config:/app/Web/config
