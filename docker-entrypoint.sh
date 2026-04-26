@@ -1,24 +1,35 @@
 #!/bin/bash
 set -e
 
-# Obtener la variable de entorno HOST_ADDRESS o usar localhost como predeterminado
+# Получаем адрес из переменных окружения Render или используем стандартный
+# ВАЖНО: В панели Render добавь HOST_ADDRESS = browserquest-php-docker-llm.onrender.com
 HOST_ADDRESS=${HOST_ADDRESS:-"localhost"}
-HOST_PORT=${HOST_PORT:-"8000"}
 
 echo "====================================================================="
-echo "Configurando BrowserQuest-PHP con host: $HOST_ADDRESS y puerto: $HOST_PORT"
+echo "Настройка Grobi Project: BrowserQuest-PHP"
+echo "Адрес сервера: $HOST_ADDRESS"
+echo "Порт для клиента: 443 (WSS)"
 echo "====================================================================="
 
-# Crear o actualizar el archivo de configuración local para el cliente web
+# Генерируем конфиг, который заставит телефон подключаться через HTTPS/WSS
+# Мы принудительно ставим порт 443 и secure: true для работы через Render
 echo '{
     "host": "'"$HOST_ADDRESS"'",
-    "port": '"$HOST_PORT"'
+    "port": 443,
+    "secure": true
 }' > /app/Web/config/config_local.json
 
-# Ver la configuración generada
-echo "Configuración generada en config_local.json:"
+# Также обновим основной билд-конфиг на всякий случай
+echo '{
+    "host": "'"$HOST_ADDRESS"'",
+    "port": 443,
+    "secure": true
+}' > /app/Web/config/config_build.json
+
+# Проверка сгенерированного файла в логах
+echo "Конфигурация успешно создана:"
 cat /app/Web/config/config_local.json
 
-# Iniciar el servidor en modo foreground
-echo "Iniciando BrowserQuest-PHP..."
+# Запуск основного сервера Workerman
+echo "Запуск сервера Workerman..."
 exec php /app/start.php start
